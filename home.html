@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C4 Coin</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 75vh;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 35px;
+            font-weight: bold;
+            margin: 10px 0 12px;
+        }
+
+        .score {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 10;
+        }
+
+        .main-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #mainImage {
+            width: 300px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px; /* فاصله پایین بمب */
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #303030;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .footer-item {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .footer-item a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #2e2e2e; /* رنگ پس‌زمینه دکمه */
+            border-radius: 5px; /* گوشه‌های گرد */
+            padding: 1px 15px; /* فاصله داخلی دکمه */
+            transition: background-color 0.3s, transform 0.2s; /* انیمیشن تغییر رنگ و اندازه */
+            color: white; /* رنگ متن */
+            font-weight: bold; /* بولد کردن متن */
+        }
+
+        .footer-item a:hover {
+            background-color: #272727; /* رنگ دکمه در حالت hover */
+            transform: scale(1.05); /* بزرگ‌تر شدن دکمه */
+        }
+
+        .footer-item img {
+            width: 35px;
+            height: ۳۵px;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0px; /* فاصله بین آیکون و متن */
+        }
+
+        #storageContainer {
+            position: fixed;
+            bottom: 130px; /* برای بالاتر بردن مخزن */
+            left: 10px; /* برای انتقال مخزن به سمت چپ */
+            background-color: #000000;
+            color: white;
+            padding: 15px; /* افزایش پدینگ */
+            text-align: center;
+            width: 120px; /* افزایش عرض مخزن */
+            font-size: 24px; /* بزرگتر کردن اندازه متن */
+            font-weight: bold; /* بولد کردن متن */
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <h1>C4 Coin</h1>
+    <div class="main-image-container">
+        <p class="score"> <img src="6077985109253931622.jpg" alt="" width="40"> 
+            <span id="score">0</span> </p>
+        <img id="mainImage" src="6077985109253931622.jpg" alt="Main Image" onmousedown="handleClick()">
+    </div>
+
+    <div id="storageContainer">
+        <span id="storage">100</span>
+    </div>
+
+    <div class="footer">
+        <div class="footer-item">
+            <a href="https://example.com/home" target="_blank">
+                <img src="6077985109253931647.jpg" alt="Home">
+                <p>Home</p>
+            </a>
+        </div>
+        <div class="footer-item">
+            <a href="https://example.com/task" target="_blank">
+                <img src="6077985109253931648.jpg" alt="Task">
+                <p>Task</p>
+            </a>
+        </div>
+        <div class="footer-item">
+            <a href="https://your-desired-link.com" target="_blank"> <!-- تغییر لینک به وب‌سایت دلخواه -->
+                <img src="6077985109253931649.jpg" alt="Friends">
+                <p>Friends</p>
+            </a>
+        </div>
+    </div>
+    <script>
+        let storageCount = 0; // مقدار اولیه مخزن
+        let userScore = 0; // امتیاز کاربر
+
+        // افزایش مخزن به ازای زمان
+        setInterval(() => {
+            if (storageCount < 100) {
+                storageCount += 1; // افزایش مقدار مخزن به ازای هر ثانیه
+                updateStorageDisplay();
+            }
+        }, 1000); // هر ۱ ثانیه
+
+        // کاهش مخزن و افزایش امتیاز کاربر
+        function handleClick() {
+            if (storageCount > 0) {
+                userScore += 1;
+                storageCount -= 1;
+                updateScoreDisplay();
+                updateStorageDisplay();
+                createScoreEffect(event.clientX, event.clientY); // ایجاد اثر امتیاز
+            } else {
+                alert('The tank is empty!');
+            }
+        }
+
+        // بروزرسانی نمایش امتیاز
+        function updateScoreDisplay() {
+            document.getElementById('score').innerText = userScore;
+        }
+
+        // بروزرسانی نمایش مخزن
+        function updateStorageDisplay() {
+            document.getElementById('storage').innerText = storageCount;
+        }
+
+        // تایمر برای پر کردن دوباره مخزن هر ۱۰۰ ثانیه
+        setInterval(() => {
+            if (storageCount < 100) {
+                storageCount += 1; // افزایش مقدار مخزن به ازای هر ثانیه
+                updateStorageDisplay();
+            }
+        }, 1000); // هر ۱ ثانیه
+
+        // ایجاد اثر امتیاز
+        function createScoreEffect(x, y) {
+            const scoreElement = document.createElement('div');
+            scoreElement.innerText = '+1';
+            scoreElement.style.position = 'absolute';
+            scoreElement.style.left = `${x}px`;
+            scoreElement.style.top = `${y}px`;
+            scoreElement.style.color = 'white';
+            scoreElement.style.fontSize = '24px';
+            scoreElement.style.transition = 'transform 1s, opacity 1s'; // انیمیشن حرکت و محو شدن
+            document.body.appendChild(scoreElement);
+
+            // حرکت به سمت بالا و محو شدن
+            setTimeout(() => {
+                scoreElement.style.transform = 'translateY(-30px)';
+                scoreElement.style.opacity = '0';
+            }, 50);
+
+            // حذف عنصر پس از پایان انیمیشن
+            scoreElement.addEventListener('transitionend', () => {
+                document.body.removeChild(scoreElement);
+            });
+        }
+    </script>
+</body>
+</html>
