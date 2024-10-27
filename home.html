@@ -42,7 +42,7 @@
             height: auto;
             cursor: pointer;
             transition: transform 0.3s ease;
-            margin-bottom: 20px; /* فاصله پایین بمب */
+            margin-bottom: 20px;
         }
 
         .footer {
@@ -64,38 +64,38 @@
         .footer-item a {
             display: inline-block;
             text-decoration: none;
-            background-color: #2e2e2e; /* رنگ پس‌زمینه دکمه */
-            border-radius: 5px; /* گوشه‌های گرد */
-            padding: 1px 15px; /* فاصله داخلی دکمه */
-            transition: background-color 0.3s, transform 0.2s; /* انیمیشن تغییر رنگ و اندازه */
-            color: white; /* رنگ متن */
-            font-weight: bold; /* بولد کردن متن */
+            background-color: #2e2e2e;
+            border-radius: 5px;
+            padding: 1px 15px;
+            transition: background-color 0.3s, transform 0.2s;
+            color: white;
+            font-weight: bold;
         }
 
         .footer-item a:hover {
-            background-color: #272727; /* رنگ دکمه در حالت hover */
-            transform: scale(1.05); /* بزرگ‌تر شدن دکمه */
+            background-color: #272727;
+            transform: scale(1.05);
         }
 
         .footer-item img {
             width: 35px;
-            height: ۳۵px;
+            height: 35px; /* اندازه صحیح */
             display: block;
             margin: 0 auto;
-            margin-bottom: 0px; /* فاصله بین آیکون و متن */
+            margin-bottom: 0px;
         }
 
         #storageContainer {
             position: fixed;
-            bottom: 130px; /* برای بالاتر بردن مخزن */
-            left: 10px; /* برای انتقال مخزن به سمت چپ */
+            bottom: 130px;
+            left: 10px;
             background-color: #000000;
             color: white;
-            padding: 15px; /* افزایش پدینگ */
+            padding: 15px;
             text-align: center;
-            width: 120px; /* افزایش عرض مخزن */
-            font-size: 24px; /* بزرگتر کردن اندازه متن */
-            font-weight: bold; /* بولد کردن متن */
+            width: 120px;
+            font-size: 24px;
+            font-weight: bold;
             z-index: 9999;
         }
     </style>
@@ -105,7 +105,7 @@
     <div class="main-image-container">
         <p class="score"> <img src="6077985109253931622.jpg" alt="" width="40"> 
             <span id="score">0</span> </p>
-        <img id="mainImage" src="6077985109253931622.jpg" alt="Main Image" onmousedown="handleClick()">
+        <img id="mainImage" src="6077985109253931622.jpg" alt="Main Image" onclick="handleClick(event)">
     </div>
 
     <div id="storageContainer">
@@ -126,7 +126,7 @@
             </a>
         </div>
         <div class="footer-item">
-            <a href="https://your-desired-link.com" target="_blank"> <!-- تغییر لینک به وب‌سایت دلخواه -->
+            <a href="https://your-desired-link.com" target="_blank">
                 <img src="6077985109253931649.jpg" alt="Friends">
                 <p>Friends</p>
             </a>
@@ -145,7 +145,7 @@
         }, 1000); // هر ۱ ثانیه
 
         // کاهش مخزن و افزایش امتیاز کاربر
-        function handleClick() {
+        function handleClick(event) {
             if (storageCount > 0) {
                 userScore += 1;
                 storageCount -= 1;
@@ -166,14 +166,6 @@
         function updateStorageDisplay() {
             document.getElementById('storage').innerText = storageCount;
         }
-
-        // تایمر برای پر کردن دوباره مخزن هر ۱۰۰ ثانیه
-        setInterval(() => {
-            if (storageCount < 100) {
-                storageCount += 1; // افزایش مقدار مخزن به ازای هر ثانیه
-                updateStorageDisplay();
-            }
-        }, 1000); // هر ۱ ثانیه
 
         // ایجاد اثر امتیاز
         function createScoreEffect(x, y) {
